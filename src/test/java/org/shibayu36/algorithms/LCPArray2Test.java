@@ -24,7 +24,7 @@ public class LCPArray2Test {
     assertThat(lcpArray).isEqualTo(new Integer[] { 1, 3, 0, 0, 2, 0 });
 
     suffixArray = SuffixArray1.make("aaaa");
-    lcpArray = LCPArray2.make("aaaa", suffixArray);
+    lcpArray = LCPArray2.make("aaaaa", suffixArray);
     assertThat(lcpArray).isEqualTo(new Integer[] { 1, 2, 3, 0 });
   }
 
