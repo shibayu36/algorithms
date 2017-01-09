@@ -7,7 +7,7 @@ machine:
     version: oraclejdk8
   timezone: Asia/Tokyo
   environment:
-    GRADLE_OPTS: -Xmx4G -Dorg.gradle.daemon=true
+    GRADLE_OPTS: -Xmx4G
   post:
     - sudo service mysql stop
     - sudo service postgresql stop
