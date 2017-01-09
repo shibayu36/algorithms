@@ -1,7 +1,3 @@
-checkout:
-  post:
-    - chmod +x ./gradlew
-
 machine:
   java:
     version: oraclejdk8
@@ -11,6 +7,10 @@ machine:
   post:
     - sudo service mysql stop
     - sudo service postgresql stop
+
+checkout:
+  post:
+    - chmod +x ./gradlew
 
 dependencies:
   override:
