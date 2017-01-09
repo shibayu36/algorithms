@@ -2,9 +2,6 @@ package org.shibayu36.algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by shibayu36 on 2016/12/22.
- */
 public class PowerSet1 {
     public static List<List<Integer>> make(List<Integer> data) {
         if (data.size() == 0) {
