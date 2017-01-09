@@ -1,0 +1,19 @@
+package org.shibayu36.algorithms;
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+/**
+ * Created by shibayu36 on 2016/12/20.
+ */
+public class Permutation2Test {
+    @Test
+    public void make() throws Exception {
+        List<List<Integer>> result = Permutation2.make(Arrays.asList(1, 2, 3));
+        System.out.println(result.toString());
+    }
+
+}
