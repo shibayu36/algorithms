@@ -4,14 +4,12 @@ import static java.lang.System.currentTimeMillis;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
 
 public class LCPArrayBenchmark {
-  @Test
-  public void make() throws Exception {
+
+  public static void main(String[] args) throws Exception {
     long begin;
     Integer[] suffixArray, lcpArray;
     String text = StringUtils.repeat("bananapanama", 1000);
