@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PowerSet1 {
-
   public static List<List<Integer>> make(List<Integer> data) {
     if (data.size() == 0) {
       List<List<Integer>> empty = new ArrayList<>();
