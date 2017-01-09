@@ -10,15 +10,11 @@ public class PowerSetGenericsTest {
 
   @Test
   public void make() throws Exception {
-    List<List<Integer>> result = PowerSet1.make(Arrays.asList());
-    System.out.println(result.toString());
+    List<List<Integer>> integerPowerSet = PowerSetGenerics.make(Arrays.asList(1, 2, 3));
+    System.out.println(integerPowerSet.toString());
 
-    result = PowerSetGenerics.make(Arrays.asList(1, 2, 3));
-    System.out.println(result.toString());
-
-    List<String> args = Arrays.asList("hoge", "fuga", "bar");
-    List<List<String>> powerSet = PowerSetGenerics.make(args);
-    System.out.println(powerSet.toString());
+    List<List<String>> stringPowerSet = PowerSetGenerics.make(Arrays.asList("hoge", "fuga", "bar"));
+    System.out.println(stringPowerSet.toString());
   }
 
 }
