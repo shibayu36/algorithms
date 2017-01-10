@@ -12,7 +12,7 @@ public class SuffixTrieSearchSample {
 
     // 指定のファイル URL のファイルをバイト列として読み込む
     try {
-      byte[] fileContentBytes = Files.readAllBytes(Paths.get("./sample.txt"));
+      byte[] fileContentBytes = Files.readAllBytes(Paths.get("./blog1.txt"));
       // 読み込んだバイト列を UTF-8 でデコードして文字列にする
       text = new String(fileContentBytes, StandardCharsets.UTF_8);
     } catch (Exception e) {}
