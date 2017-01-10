@@ -24,4 +24,8 @@ public class Suffix implements Comparable<Suffix> {
     }
     return this.length() - that.length();
   }
+
+  public String toString() {
+    return this.text.substring(this.index);
+  }
 }
