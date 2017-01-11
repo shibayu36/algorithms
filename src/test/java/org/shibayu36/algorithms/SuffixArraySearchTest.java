@@ -59,7 +59,6 @@ public class SuffixArraySearchTest {
 
     SuffixArraySearch search = new SuffixArraySearch(text);
     List<Integer> positions;
-    List<String> suffixStrings;
 
     positions = search.searchPattern("基礎技術");
     assertThat(positions).containsExactlyInAnyOrder(0, 518, 835, 881, 1039, 1097);
