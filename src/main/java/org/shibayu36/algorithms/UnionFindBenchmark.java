@@ -48,5 +48,18 @@ public class UnionFindBenchmark {
         uf.connected(connected.get(0), connected.get(1));
       }
     }
+
+    @Benchmark.Bench
+    public void QuickUnionUF() {
+      QuickUnionUF uf = new QuickUnionUF(size);
+
+      for (List<Integer> union : unions) {
+        uf.union(union.get(0), union.get(1));
+      }
+
+      for (List<Integer> connected : connecteds) {
+        uf.connected(connected.get(0), connected.get(1));
+      }
+    }
   }
 }
