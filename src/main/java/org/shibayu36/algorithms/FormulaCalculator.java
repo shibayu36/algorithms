@@ -35,11 +35,17 @@ public class FormulaCalculator {
         vals.push(Double.parseDouble(token));
       }
       else if (isOperator(token)) {
-        // tokenがオペレーターの時
+        // tokenがオペレータ(o1)の時
+        // - オペレータスタックのトップにオペレータo2 があり、o1 が左結合性で、
+        //   かつ優先順位が o2 と等しいか低い場合、以下を繰り返す
+        //     - o2 をオペレータスタックからpopし、値スタックから値を二つpopし、
+        //       演算し、結果を値スタックにpushする
+        // - o1 をオペレータスタックにプッシュする。
+        // (右結合性のオペレータは未実装)
         while (ops.size() > 0) {
           String lastOp = ops.pop();
-          // オペレータスタックの最後もオペレータ、つまり(でなく、
-          // かつ現在のtokenのほうが優先度が低いなら計算する
+          // "("が入っている場合があるため
+          // オペレータスタックの最後もオペレータであることを確認する
           if (isOperator(lastOp) && getOpPriority(token) <= getOpPriority(lastOp)) {
             double val2 = vals.pop();
             double val1 = vals.pop();
@@ -53,9 +59,15 @@ public class FormulaCalculator {
         ops.push(token);
       }
       else if (token.equals("(")) {
+        // トークンが左括弧の場合、オペレータスタックにプッシュする
         ops.push(token);
       }
       else if (token.equals(")")) {
+        // トークンが右括弧の場合
+        // - オペレータスタックのトップにあるトークンが左括弧になるまで、
+        //   オペレータスタックからオペレータをpopし、値スタックから値を二つpopし
+        //   それらを演算し、値スタックに結果をプッシュする
+        // - 左括弧をスタックからpopするが、何もせずに捨てる
         while (ops.size() > 0) {
           String op = ops.pop();
           if (op.equals("(")) {
@@ -70,8 +82,10 @@ public class FormulaCalculator {
       }
     }
 
+    // 読み取るべきトークンが無くなったら、オペレータスタックが空になるまで
+    // オペレータスタックからオペレータをpopし、値スタックから値を二つpopし
+    // それらを演算し、値スタックに結果をプッシュする
     while (ops.size() > 0) {
-      // オペレータがなくなるまで計算を続ける
       String op = ops.pop();
       if (isOperator(op)) {
         double val2 = vals.pop();
