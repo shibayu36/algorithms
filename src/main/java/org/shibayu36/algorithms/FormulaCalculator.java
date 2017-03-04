@@ -84,8 +84,8 @@ public class FormulaCalculator {
           }
         }
       }
-      System.out.println(ops);
-      System.out.println(vals);
+      System.out.println("ops: " + ops);
+      System.out.println("vals: " + vals);
       System.out.println("------------");
     }
 
@@ -100,8 +100,8 @@ public class FormulaCalculator {
         double val1 = vals.pop();
         vals.push(applyOperator(op, val1, val2));
       }
-      System.out.println(ops);
-      System.out.println(vals);
+      System.out.println("ops: " + ops);
+      System.out.println("vals: " + vals);
       System.out.println("------------");
     }
 
