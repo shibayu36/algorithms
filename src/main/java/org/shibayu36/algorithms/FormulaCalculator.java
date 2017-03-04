@@ -35,7 +35,7 @@ public class FormulaCalculator {
     for (String token: tokens) {
       System.out.println("token: " + token);
       if (NumberUtils.isCreatable(token)) {
-        // tokenが数値なら数値に変換して値スタックに積む
+        // tokenが数値なら値スタックに積む
         vals.push(Double.parseDouble(token));
       }
       else if (isOperator(token)) {
