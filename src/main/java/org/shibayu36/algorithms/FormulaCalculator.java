@@ -29,7 +29,11 @@ public class FormulaCalculator {
 
     String[] tokens = formula.split(" ");
 
+    System.out.println("formula: " + formula);
+    System.out.println("===============");
+
     for (String token: tokens) {
+      System.out.println("token: " + token);
       if (NumberUtils.isCreatable(token)) {
         // tokenが数値なら数値に変換して値スタックに積む
         vals.push(Double.parseDouble(token));
@@ -80,18 +84,25 @@ public class FormulaCalculator {
           }
         }
       }
+      System.out.println(ops);
+      System.out.println(vals);
+      System.out.println("------------");
     }
 
     // 読み取るべきトークンが無くなったら、オペレータスタックが空になるまで
     // オペレータスタックからオペレータをpopし、値スタックから値を二つpopし
     // それらを演算し、値スタックに結果をプッシュする
     while (ops.size() > 0) {
+      System.out.println("last calculation");
       String op = ops.pop();
       if (isOperator(op)) {
         double val2 = vals.pop();
         double val1 = vals.pop();
         vals.push(applyOperator(op, val1, val2));
       }
+      System.out.println(ops);
+      System.out.println(vals);
+      System.out.println("------------");
     }
     return vals.pop();
   }
