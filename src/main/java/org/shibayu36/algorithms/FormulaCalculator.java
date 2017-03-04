@@ -104,6 +104,8 @@ public class FormulaCalculator {
       System.out.println(vals);
       System.out.println("------------");
     }
+
+    // 値スタックに最後に入っている結果が演算結果である
     return vals.pop();
   }
 
