@@ -1,0 +1,8 @@
+AllCops:
+  NewCops: enable
+
+Style/WhileUntilModifier:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
