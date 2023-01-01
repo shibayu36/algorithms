@@ -12,6 +12,10 @@ class WeightedGraph
     @graph[from].push(Edge.new(from, to, weight))
   end
 
+  def points
+    @graph.keys
+  end
+
   def edges
     @graph.values.flat_map do |edges|
       edges.map do |edge|
