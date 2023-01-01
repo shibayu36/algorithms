@@ -9,7 +9,7 @@ describe WeightedGraph do
     graph.add_edge(3, 5, 4)
     graph.add_edge(4, 5, 1)
     graph.add_edge(4, 6, 2)
-    expect(graph.to_h).to eq(
+    expect(graph.edges).to eq(
       [
         { from: 1, to: 2, weight: 2 },
         { from: 1, to: 3, weight: 1 },
@@ -35,7 +35,7 @@ describe WeightedGraph do
     graph.add_directed_edge(3, 5, 4)
     graph.add_directed_edge(4, 5, 1)
     graph.add_directed_edge(4, 6, 2)
-    expect(graph.to_h).to eq(
+    expect(graph.edges).to eq(
       [
         { from: 1, to: 2, weight: 2 },
         { from: 1, to: 3, weight: 1 },
