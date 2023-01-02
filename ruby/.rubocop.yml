@@ -6,3 +6,6 @@ Style/WhileUntilModifier:
 
 Style/IfUnlessModifier:
   Enabled: false
+
+Style/Next:
+  Enabled: false
