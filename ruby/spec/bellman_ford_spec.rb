@@ -18,4 +18,20 @@ describe WeightedGraph do
     graph.add_edge('F', 'G', 4)
     expect(BellmanFord.new(graph).shortest_cost('A', 'G')).to eq(14)
   end
+
+  it 'also calculates shortest cost when graph is directed' do
+    graph = WeightedGraph.new
+    graph.add_directed_edge(0, 2, 1)
+    graph.add_directed_edge(0, 3, 4)
+    graph.add_directed_edge(0, 4, 5)
+    graph.add_directed_edge(2, 1, 1)
+    graph.add_directed_edge(3, 6, 4)
+    graph.add_directed_edge(4, 5, 2)
+    graph.add_directed_edge(4, 6, 2)
+    graph.add_directed_edge(1, 5, 4)
+    graph.add_directed_edge(1, 7, 8)
+    graph.add_directed_edge(5, 7, 2)
+    graph.add_directed_edge(6, 7, 5)
+    expect(BellmanFord.new(graph).shortest_cost(0, 7)).to eq(8)
+  end
 end
