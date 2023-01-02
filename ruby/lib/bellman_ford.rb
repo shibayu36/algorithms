@@ -7,7 +7,7 @@ class BellmanFord
     @cost = Hash.new(Float::INFINITY)
     @cost[from] = 0
 
-    (0..@graph.points.length - 1).each do |_i|
+    (0..@graph.points.length - 1).each do |i|
       is_changed = false
 
       @graph.edges.each do |edge|
@@ -15,7 +15,13 @@ class BellmanFord
         if candidate_cost < @cost[edge[:to]]
           @cost[edge[:to]] = candidate_cost
           is_changed = true
-          # TODO: negative loop detection
+
+          # negative loop detection.
+          # This algorithm must finish within n - 1 iterations.
+          # If the N-th iteration change cost, there must be a negative loop.
+          if i == @graph.points.length - 1
+            raise 'negative loop detected'
+          end
         end
       end
 
@@ -24,4 +30,6 @@ class BellmanFord
 
     @cost[to]
   end
+
+  # TODO: shortest_path
 end

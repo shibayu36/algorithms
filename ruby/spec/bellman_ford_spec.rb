@@ -34,4 +34,14 @@ describe WeightedGraph do
     graph.add_directed_edge(6, 7, 5)
     expect(BellmanFord.new(graph).shortest_cost(0, 7)).to eq(8)
   end
+
+  it 'can detect negative loop' do
+    graph = WeightedGraph.new
+    graph.add_edge('A', 'B', 1)
+    graph.add_edge('B', 'C', 3)
+    graph.add_edge('C', 'D', -5)
+    graph.add_edge('D', 'B', 1)
+    graph.add_edge('C', 'E', 2)
+    expect { BellmanFord.new(graph).shortest_cost('A', 'E') }.to raise_error('negative loop detected')
+  end
 end
