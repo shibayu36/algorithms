@@ -1,11 +1,13 @@
 class BellmanFord
-  def initialize(graph)
+  def initialize(graph, from, to)
     @graph = graph
+    @from = from
+    @to = to
   end
 
-  def shortest_cost(from, to)
+  def shortest_cost
     @cost = Hash.new(Float::INFINITY)
-    @cost[from] = 0
+    @cost[@from] = 0
 
     (0..@graph.points.length - 1).each do |i|
       is_changed = false
@@ -28,7 +30,7 @@ class BellmanFord
       break unless is_changed
     end
 
-    @cost[to]
+    @cost[@to]
   end
 
   # TODO: shortest_path
