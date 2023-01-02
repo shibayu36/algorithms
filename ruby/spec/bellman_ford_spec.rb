@@ -17,6 +17,7 @@ describe WeightedGraph do
     graph.add_edge('E', 'G', 7)
     graph.add_edge('F', 'G', 4)
     expect(BellmanFord.new(graph, 'A', 'G').shortest_cost).to eq(14)
+    expect(BellmanFord.new(graph, 'A', 'G').shortest_path).to eq(%w[A C D F G])
   end
 
   it 'also calculates shortest cost when graph is directed' do
@@ -33,6 +34,7 @@ describe WeightedGraph do
     graph.add_directed_edge(5, 7, 2)
     graph.add_directed_edge(6, 7, 5)
     expect(BellmanFord.new(graph, 0, 7).shortest_cost).to eq(8)
+    expect(BellmanFord.new(graph, 0, 7).shortest_path).to eq([0, 2, 1, 5, 7])
   end
 
   it 'can detect negative loop' do

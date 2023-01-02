@@ -6,6 +6,8 @@ class BellmanFord
   end
 
   def shortest_cost
+    @last_updated = Hash.new(nil)
+
     @cost = Hash.new(Float::INFINITY)
     @cost[@from] = 0
 
@@ -16,6 +18,7 @@ class BellmanFord
         candidate_cost = @cost[edge[:from]] + edge[:weight]
         if candidate_cost < @cost[edge[:to]]
           @cost[edge[:to]] = candidate_cost
+          @last_updated[edge[:to]] = edge[:from]
           is_changed = true
 
           # negative loop detection.
@@ -33,5 +36,14 @@ class BellmanFord
     @cost[@to]
   end
 
-  # TODO: shortest_path
+  def shortest_path
+    shortest_cost
+    path = [@to]
+    loop do
+      break if @last_updated[path[0]].nil?
+
+      path.unshift(@last_updated[path[0]])
+    end
+    path
+  end
 end
