@@ -49,8 +49,8 @@ class Heap
   end
 
   def min_child_of(index)
-    left_child_index = 2 * index + 1
-    right_child_index = 2 * index + 2
+    left_child_index = (2 * index) + 1
+    right_child_index = (2 * index) + 2
 
     left_val = nodes[left_child_index]
     right_val = nodes[right_child_index]
