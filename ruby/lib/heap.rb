@@ -24,6 +24,8 @@ class Heap
   end
 
   def pop
+    return @nodes.pop if size <= 1
+
     res = @nodes[0]
 
     @nodes[0] = @nodes.pop

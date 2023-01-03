@@ -28,6 +28,8 @@ describe Heap do
       expect(heap.pop).to eq 3
       expect(heap.pop).to eq 4
       expect(heap.pop).to eq 5
+
+      expect(heap.pop).to eq nil
     end
   end
 end
