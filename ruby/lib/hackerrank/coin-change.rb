@@ -11,26 +11,22 @@ require 'stringio'
 #
 
 def getWays(n, c)
-  # Write your code here
-  getRawWays(n, c).tap { |ways| p(ways) }.size
+  getWaysHelper(n, c, 0)
 end
 
-def getRawWays(n, c)
-  return [] if n <= 0
-  return [] if c.size == 0
+def getWaysHelper(n, c, index)
+  return 0 if n < 0 # no solution
+  return 0 if c.size <= index # no solution
+  return 1 if n == 0 # found solution
 
-  result = []
-  c.each do |coin|
-    ways = getRawWays(n - coin, c)
-    next if ways.empty?
-
-    result << ways.map { |way| coin.concat(way) }
-  end
-  result
+  getWaysHelper(n - c[index], c, index) + getWaysHelper(n, c, index + 1)
 end
 
 puts(getWays(0, [1, 2]))
 puts(getWays(1, []))
+puts(getWays(1, [1, 2]))
+puts(getWays(4, [1, 2, 3]))
+puts(getWays(10, [2, 5, 3, 6]))
 
 # first_multiple_input = gets.rstrip.split
 
