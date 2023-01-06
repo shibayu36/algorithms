@@ -35,6 +35,8 @@ puts(getWays(1, [1, 2]))
 puts(getWays(4, [1, 2, 3]))
 puts(getWays(10, [2, 5, 3, 6]))
 
+# fptr = File.open(ENV.fetch('OUTPUT_PATH', nil), 'w')
+
 # first_multiple_input = gets.rstrip.split
 
 # n = first_multiple_input[0].to_i
@@ -46,9 +48,6 @@ puts(getWays(10, [2, 5, 3, 6]))
 # # Print the number of ways of making change for 'n' units using coins having the values given by 'c'
 
 # ways = getWays n, c
-# puts(ways)
-
-# fptr = File.open(ENV.fetch('OUTPUT_PATH', nil), 'w')
 
 # fptr.write ways
 # fptr.write "\n"
