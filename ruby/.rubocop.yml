@@ -9,3 +9,6 @@ Style/IfUnlessModifier:
 
 Style/Next:
   Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
