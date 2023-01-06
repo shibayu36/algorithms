@@ -11,15 +11,22 @@ require 'stringio'
 #
 
 def getWays(n, c)
-  getWaysHelper(n, c, 0)
+  getWaysHelper(n, c, 0, {})
 end
 
-def getWaysHelper(n, c, index)
+def getWaysHelper(n, c, index, memo)
   return 0 if n < 0 # no solution
   return 0 if c.size <= index # no solution
   return 1 if n == 0 # found solution
 
-  getWaysHelper(n - c[index], c, index) + getWaysHelper(n, c, index + 1)
+  memo[cacheKey(n - c[index], index)] ||= getWaysHelper(n - c[index], c, index, memo)
+  memo[cacheKey(n, index + 1)] ||= getWaysHelper(n, c, index + 1, memo)
+
+  memo[cacheKey(n - c[index], index)] + memo[cacheKey(n, index + 1)]
+end
+
+def cacheKey(n, index)
+  "#{n}-#{index}"
 end
 
 puts(getWays(0, [1, 2]))
