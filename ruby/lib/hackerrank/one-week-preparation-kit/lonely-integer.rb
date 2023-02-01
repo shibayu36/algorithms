@@ -1,5 +1,6 @@
 require 'json'
 require 'stringio'
+require 'set'
 
 #
 # Complete the 'lonelyinteger' function below.
@@ -9,13 +10,13 @@ require 'stringio'
 #
 
 def lonelyinteger(a)
-  res = Hash.new { |h, k| h[k] = 0 }
+  res = Set.new
 
   a.each do |num|
-    res[num] += 1
+    res.include?(num) ? res.delete(num) : res.add(num)
   end
 
-  res.keys.find { |k| res[k] == 1 }
+  res.first
 end
 
 fptr = File.open(ENV.fetch('OUTPUT_PATH', nil), 'w')
