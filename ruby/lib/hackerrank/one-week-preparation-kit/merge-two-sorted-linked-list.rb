@@ -1,116 +1,83 @@
-class LinkedList
-  attr_accessor :head, :tail
-
-  def initialize(array = [])
-    if array.empty?
-      @head = nil
-      @tail = nil
-      return
-    end
-
-    list = Node.new(array[0])
-    prev = list
-    array[1..].each do |v|
-      current = Node.new(v)
-      prev.next = current
-      prev = current
-    end
-
-    @head = list
-    @tail = prev
-  end
-
-  def push(val)
-    node = Node.new(val)
-
-    unless @head
-      @head = node
-      @tail = node
-    end
-
-    @tail.next = node
-    @tail = node
-  end
-
-  def empty?
-    @head.nil?
-  end
-
-  def to_a
-    result = []
-    current = @head
-    while current
-      result << current.val
-      current = current.next
-    end
-    result
-  end
-end
-
-class Node
+class SinglyLinkedListNode
   attr_accessor :val, :next
 
-  def initialize(val, n = nil)
+  def initialize(val, nxt = nil)
     @val = val
-    @next = n
+    @next = nxt
   end
 end
 
-def merge_list(l1, l2)
-  return l1 if l2.empty?
-  return l2 if l1.empty?
+def make_list_from_array(array)
+  list = SinglyLinkedListNode.new(array[0])
+  prev = list
+  array[1..].each do |v|
+    current = SinglyLinkedListNode.new(v)
+    prev.next = current
+    prev = current
+  end
 
-  result = LinkedList.new
+  list
+end
 
-  l1_point = l1.head
-  l2_point = l2.head
+def merge_lists(l1, l2)
+  l1_cur = l1
+  l2_cur = l2
 
-  while l1_point || l2_point
-    unless l1_point
-      result.push(l2_point.val)
-      l2_point = l2_point.next
-      next
-    end
-    unless l2_point
-      result.push(l1_point.val)
-      l1_point = l1_point.next
-      next
-    end
+  res = SinglyLinkedListNode.new(nil)
+  res_cur = res
 
-    if l1_point.val < l2_point.val
-      result.push(l1_point.val)
-      l1_point = l1_point.next
-    elsif l1_point.val >= l2_point.val
-      result.push(l2_point.val)
-      l2_point = l2_point.next
+  while l1_cur && l2_cur
+    if l1_cur.val < l2_cur.val
+      res_cur.next = l1_cur
+      res_cur = res_cur.next
+      l1_cur = l1_cur.next
+    else
+      res_cur.next = l2_cur
+      res_cur = res_cur.next
+      l2_cur = l2_cur.next
     end
   end
 
+  if l1_cur
+    res_cur.next = l1_cur
+  elsif l2_cur
+    res_cur.next = l2_cur
+  end
+
+  res.next
+end
+
+def list_to_a(l)
+  result = []
+  current = l
+  while current
+    result << current.val
+    current = current.next
+  end
   result
 end
 
-# p(merge_list(LinkedList.new([]), LinkedList.new([])).to_a)
-# p(merge_list(LinkedList.new([1]), LinkedList.new([])).to_a)
-# p(merge_list(LinkedList.new([]), LinkedList.new([2])).to_a)
-# p(merge_list(LinkedList.new([]), LinkedList.new([2, 3])).to_a)
-# p(merge_list(LinkedList.new([1, 3, 7]), LinkedList.new([1, 2])).to_a)
-# p(merge_list(LinkedList.new([1, 2, 3]), LinkedList.new([3, 4])).to_a)
+# p(make_list_from_array([1]))
+# p(make_list_from_array([1, 2]))
+# p(list_to_a(merge_lists(make_list_from_array([1, 3, 7]), make_list_from_array([1, 2]))))
 
 test_case_num = gets.strip.to_i
 
 test_case_num.times do
-  l1 = LinkedList.new
-  l1_count = gets.strip.to_i
-  l1_count.times do
-    l1.push(gets.strip.to_i)
+  a1 = []
+  a1_count = gets.strip.to_i
+  a1_count.times do
+    a1.push(gets.strip.to_i)
   end
+  l1 = make_list_from_array(a1)
 
-  l2 = LinkedList.new
-  l2_count = gets.strip.to_i
-  l2_count.times do
-    l2.push(gets.strip.to_i)
+  a2 = []
+  a2_count = gets.strip.to_i
+  a2_count.times do
+    a2.push(gets.strip.to_i)
   end
+  l2 = make_list_from_array(a2)
 
-  result = merge_list(l1, l2)
-  puts(result.to_a.join(' '))
+  result = merge_lists(l1, l2)
+  puts(list_to_a(result).join(' '))
 end
