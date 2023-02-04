@@ -13,10 +13,10 @@ require 'stringio'
 def caesarCipher(s, k)
   s.chars.map do |c|
     code = c.ord
-    if code >= 65 && code <= 90
-      (((code - 65 + k) % 26) + 65).chr
-    elsif code >= 97 && code <= 122
-      (((code - 97 + k) % 26) + 97).chr
+    if 'a' <= c && c <= 'z'
+      (((c.ord - 'a'.ord + k) % 26) + 'a'.ord).chr
+    elsif 'A' <= c && c <= 'Z'
+      (((c.ord - 'A'.ord + k) % 26) + 'A'.ord).chr
     else
       c
     end
