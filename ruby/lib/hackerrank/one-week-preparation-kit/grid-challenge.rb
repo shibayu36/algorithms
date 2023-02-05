@@ -9,11 +9,16 @@ require 'stringio'
 #
 
 def gridChallenge(grid)
+  # N = rows, M = columns
   size = grid[0].length
+  # O(NMlogM)
   grid_to_chars = grid.map { |g| g.chars.sort }
 
+  # O(NM)
   size.times do |i|
+    # O(M)
     column_chars = grid_to_chars.map { |g| g[i] }
+    # O(M)
     column_chars.each_cons(2) do |a, b|
       return 'NO' if a > b
     end
