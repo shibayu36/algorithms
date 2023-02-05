@@ -23,12 +23,12 @@ class SimpleTextEditor
   end
 
   def append(s)
-    @undo_stack.push(@content)
     @content += s
+    @undo_stack.push("2 #{s.length}")
   end
 
   def delete(k)
-    @undo_stack.push(@content)
+    @undo_stack.push("1 #{@content[-k..-1]}")
     @content = @content[0..-k - 1]
   end
 
@@ -37,7 +37,9 @@ class SimpleTextEditor
   end
 
   def undo
-    @content = @undo_stack.pop
+    operate(@undo_stack.pop)
+    # remove recent operation because operate method pushes it to undo_stack
+    @undo_stack.pop
   end
 end
 
