@@ -6,7 +6,9 @@ class SolveMaze
     @maze_width = @maze_struct.first.size
     @maze_height = @maze_struct.size
 
+    # The distance between start to @maze_dist[x][y]
     @maze_dist = Array.new(@maze_height) { Array.new(@maze_width, nil) }
+    # The previous position of @maze_dist[x][y]
     @maze_prev_links = Array.new(@maze_height) { Array.new(@maze_width, nil) }
 
     @search_queue = []
