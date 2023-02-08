@@ -80,8 +80,24 @@ maze_str = <<~STR
   ...#.#..
   S.......
 STR
-
 maze_struct = maze_str.split("\n").map { |line| line.split('') }
 maze_solver = SolveMaze.new(maze_struct)
 puts(maze_solver.calc_by_bfs)
 maze_solver.print_route
+
+maze_str2 = <<~STR
+  S..#......
+  .#...##.#.
+  .##.#...#.
+  ...#..##.#
+  ##..#.#...
+  ...#.#..#G
+  .#....#..#
+  ..#.#..#..
+  .#.#.#..#.
+  ......#...
+STR
+maze_struct2 = maze_str2.split("\n").map { |line| line.split('') }
+maze_solver2 = SolveMaze.new(maze_struct2)
+puts(maze_solver2.calc_by_bfs)
+maze_solver2.print_route
