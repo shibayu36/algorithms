@@ -10,12 +10,17 @@ class SolveMaze
     @maze_height = @maze_struct.size
 
     @maze_dist = Array.new(@maze_height) { Array.new(@maze_width, nil) }
+    @maze_prev_links = Array.new(@maze_height) { Array.new(@maze_width, nil) }
+
     @search_queue = []
     @maze_struct.each_with_index do |row, x|
       row.each_with_index do |val, y|
         if val == 'S'
+          @maze_start = [x, y]
           @search_queue.push([x, y])
           @maze_dist[x][y] = 0
+        elsif val == 'G'
+          @maze_goal = [x, y]
         end
       end
     end
@@ -37,8 +42,31 @@ class SolveMaze
         next if @maze_dist[next_x][next_y] # already visited
 
         @maze_dist[next_x][next_y] = @maze_dist[cur_x][cur_y] + 1
+        @maze_prev_links[next_x][next_y] = [cur_x, cur_y]
         @search_queue.push([next_x, next_y])
       end
+    end
+  end
+
+  def get_route
+    route = []
+    cur_x, cur_y = @maze_goal
+    until cur_x == @maze_start[0] && cur_y == @maze_start[1]
+      route.unshift([cur_x, cur_y])
+      cur_x, cur_y = @maze_prev_links[cur_x][cur_y]
+    end
+    route.unshift(@maze_start)
+    route
+  end
+
+  def print_route
+    route = get_route
+    maze_solved_struct = Marshal.load(Marshal.dump(@maze_struct))
+    route.each do |x, y|
+      maze_solved_struct[x][y] = '*'
+    end
+    maze_solved_struct.each do |row|
+      puts(row.join(''))
     end
   end
 end
@@ -55,4 +83,6 @@ maze_str = <<~STR
 STR
 
 maze_struct = maze_str.split("\n").map { |line| line.split('') }
-puts(SolveMaze.new(maze_struct).calc_by_bfs)
+maze_solver = SolveMaze.new(maze_struct)
+puts(maze_solver.calc_by_bfs)
+maze_solver.print_route
