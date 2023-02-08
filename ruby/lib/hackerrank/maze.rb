@@ -61,7 +61,7 @@ class SolveMaze
   def print_route
     route = get_route
     maze_solved_struct = Marshal.load(Marshal.dump(@maze_struct))
-    route.each do |x, y|
+    route[1..-2].each do |x, y|
       maze_solved_struct[x][y] = '*'
     end
     maze_solved_struct.each do |row|
