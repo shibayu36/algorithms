@@ -12,3 +12,9 @@ Style/Next:
 
 Style/ConditionalAssignment:
   Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
