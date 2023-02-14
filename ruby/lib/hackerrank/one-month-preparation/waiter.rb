@@ -12,31 +12,57 @@ require 'prime'
 #
 
 def waiter(number, q)
-  stacks = [number.reverse, []]
+  stack = number.reverse
   answers = []
 
-  Prime.take(q).each_with_index do |prime, i|
-    pop_stack = stacks[i % 2]
-    push_stack = stacks[(i + 1) % 2]
+  Prime.take(q).each do |prime|
+    other_stack = []
 
-    while pop_stack.size > 0
-      target = pop_stack.pop
+    while stack.size > 0
+      target = stack.pop
       if target % prime == 0
         answers.push(target)
       else
-        push_stack.push(target)
+        other_stack.push(target)
       end
     end
+
+    stack = other_stack
   end
 
-  if stacks[0].empty?
-    answers += stacks[1]
-  else
-    answers += stacks[0]
+  if stack.size > 0
+    answers += stack
   end
 
   answers
 end
+
+# def waiter(number, q)
+#   stacks = [number.reverse, []]
+#   answers = []
+
+#   Prime.take(q).each_with_index do |prime, i|
+#     pop_stack = stacks[i % 2]
+#     push_stack = stacks[(i + 1) % 2]
+
+#     while pop_stack.size > 0
+#       target = pop_stack.pop
+#       if target % prime == 0
+#         answers.push(target)
+#       else
+#         push_stack.push(target)
+#       end
+#     end
+#   end
+
+#   if stacks[0].empty?
+#     answers += stacks[1]
+#   else
+#     answers += stacks[0]
+#   end
+
+#   answers
+# end
 
 # p(waiter([3, 4, 7, 6, 5], 1))
 # p(waiter([3, 3, 4, 4, 9], 2))
