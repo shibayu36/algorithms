@@ -1,3 +1,4 @@
+# MinHeap
 class Heap
   attr_reader :nodes
 
@@ -40,6 +41,10 @@ class Heap
     end
 
     res
+  end
+
+  def top
+    size == 0 ? nil : @nodes[0]
   end
 
   private

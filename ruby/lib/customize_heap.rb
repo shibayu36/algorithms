@@ -42,6 +42,10 @@ class Heap
     res
   end
 
+  def top
+    size == 0 ? nil : @nodes[0]
+  end
+
   private
 
   def parent_of(index)
