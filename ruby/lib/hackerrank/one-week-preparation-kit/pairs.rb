@@ -12,7 +12,8 @@ require 'set'
 #
 
 def pairs(k, arr)
-  set = Set.new(arr)
+  # set = Set.new(arr)
+  set = arr.to_h { |num| [num, true] }
 
   result = 0
   arr.each do |num|
