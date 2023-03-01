@@ -12,40 +12,32 @@ require 'stringio'
 #  2. LONG_INTEGER_ARRAY c
 #
 
-# Wrong... we cannot use dp model because we can select the same coin multiple times
-# def getWays(n, c)
-#   # dp[i, sum]
-#   dp = Array.new(c.size + 1) { Array.new(n + 1, 0) }
-#   dp[0][0] = 1
-#   # (1..n).each do |sum|
-#   #   dp[0][sum] = 0
-#   # end
+def getWays(n, c)
+  # dp[sum]
+  dp = Array.new(n + 1, 0)
+  dp[0] = 1
 
-#   (0..c.size - 1).each do |i|
-#     (0..n).each do |sum|
-#       # not select
-#       dp[i + 1][sum] += dp[i][sum]
+  c.each do |coin|
+    (1..n).each do |sum|
+      if sum >= coin
+        dp[sum] += dp[sum - coin]
+      end
+    end
+  end
 
-#       # select
-#       if sum >= c[i]
-#         dp[i + 1][sum] += dp[i][sum - c[i]]
-#       end
-#     end
-#   end
-
-#   dp[c.size][n]
-# end
-
-def getWays(n, c, memo = {})
-  return memo[[n, c]] if memo[[n, c]]
-  return 1 if n == 0 && c.size == 0
-  return 0 if n < 0 || c.size == 0
-
-  selected = getWays(n - c[0], c, memo)
-  not_selected = getWays(n, c[1..], memo)
-
-  memo[[n, c]] = selected + not_selected
+  dp[n]
 end
+
+# def getWays(n, c, memo = {})
+#   return memo[[n, c]] if memo[[n, c]]
+#   return 1 if n == 0 && c.size == 0
+#   return 0 if n < 0 || c.size == 0
+
+#   selected = getWays(n - c[0], c, memo)
+#   not_selected = getWays(n, c[1..], memo)
+
+#   memo[[n, c]] = selected + not_selected
+# end
 
 # fptr = File.open(ENV.fetch('OUTPUT_PATH', nil), 'w')
 fptr = $stdout
