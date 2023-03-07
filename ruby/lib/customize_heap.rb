@@ -2,7 +2,7 @@ class CustomizeHeap
   attr_reader :nodes
 
   def initialize(arr, &cmp)
-    @cmp = cmp || lambda do |nodes, p_i, c_i|
+    @cmp = cmp || proc do |nodes, p_i, c_i|
       # min heap
       nodes[p_i] <= nodes[c_i]
     end
