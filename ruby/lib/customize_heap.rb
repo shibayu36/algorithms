@@ -1,7 +1,11 @@
-class Heap
+class CustomizeHeap
   attr_reader :nodes
 
-  def initialize(arr)
+  def initialize(arr, &cmp)
+    @cmp = cmp || lambda do |nodes, p_i, c_i|
+      # min heap
+      nodes[p_i] <= nodes[c_i]
+    end
     @nodes = []
     arr.each { |val| push(val) }
   end
@@ -16,7 +20,7 @@ class Heap
     current_index = size - 1
     parent_index = parent_of(size - 1)
 
-    while current_index > 0 && !priority_cmp(parent_index, current_index)
+    while current_index > 0 && !@cmp.call(@nodes, parent_index, current_index)
       swap(parent_index, current_index)
       current_index = parent_index
       parent_index = parent_of(current_index)
@@ -33,7 +37,7 @@ class Heap
     current_index = 0
     child_index = priority_child_of(current_index)
 
-    while child_index && priority_cmp(child_index, current_index)
+    while child_index && @cmp.call(@nodes, child_index, current_index)
       swap(child_index, current_index)
       current_index = child_index
       child_index = priority_child_of(current_index)
@@ -60,14 +64,10 @@ class Heap
     right_val = nodes[right_child_index]
 
     if left_val && right_val
-      priority_cmp(left_child_index, right_child_index) ? left_child_index : right_child_index
+      @cmp.call(@nodes, left_child_index, right_child_index) ? left_child_index : right_child_index
     elsif left_val
       left_child_index
     end
-  end
-
-  def priority_cmp(i, j)
-    @nodes[i] >= @nodes[j]
   end
 
   def swap(i, j)
