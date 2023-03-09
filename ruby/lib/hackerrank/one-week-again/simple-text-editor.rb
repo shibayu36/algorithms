@@ -1,6 +1,7 @@
 class SimpleTextEditor
   def initialize
     @string = ''
+    # to save undo commands
     @undo_stack = []
   end
 
@@ -20,12 +21,12 @@ class SimpleTextEditor
   end
 
   def append(w)
-    @undo_stack.push(@string.dup)
+    @undo_stack.push("2 #{w.length}")
     @string += w
   end
 
   def delete(k)
-    @undo_stack.push(@string.dup)
+    @undo_stack.push("1 #{@string[-k..-1]}")
     @string = @string[0..-k - 1]
   end
 
@@ -34,7 +35,10 @@ class SimpleTextEditor
   end
 
   def undo
-    @string = @undo_stack.pop
+    operate(@undo_stack.pop)
+    # operate pushes to unnecessary op to undo_stack
+    # so call pop to clear it
+    @undo_stack.pop
   end
 end
 
