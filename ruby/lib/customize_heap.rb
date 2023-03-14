@@ -1,3 +1,8 @@
+# Default is min heap
+# if you want to use max heap,
+# heap = CustomizeHeap.new([0, 1, 3, 5, 4, 3]) do |nodes, p_i, c_i|
+#   nodes[p_i] >= nodes[c_i]
+# end
 class CustomizeHeap
   attr_reader :nodes
 
